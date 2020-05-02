@@ -1,0 +1,5 @@
+com/tickShare/repositories/TripRepository.class
+com/tickShare/entities/Trip.class
+com/tickShare/TickShareApplication.class
+com/tickShare/controllers/TripController.class
+com/tickShare/entities/ITrip.class
