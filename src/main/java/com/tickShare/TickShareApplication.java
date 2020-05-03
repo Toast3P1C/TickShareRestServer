@@ -1,6 +1,5 @@
 package com.tickShare;
 
-import com.tickShare.entities.ITrip;
 import com.tickShare.entities.Trip;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +11,7 @@ import com.tickShare.repositories.TripRepository;
 import java.util.Date;
 
 @SpringBootApplication
+
 public class TickShareApplication {
 
 	public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class TickShareApplication {
 	@Bean
 	CommandLineRunner initialize(TripRepository tripRepository) {
 		return args -> {
-				ITrip trip = new Trip("Test","test", new Date(System.currentTimeMillis()),4,"Token");
+				Trip trip = new Trip("Test","test", new Date(System.currentTimeMillis()),4,"Token");
 				tripRepository.save(trip);
 				tripRepository.findAll().forEach(System.out::println);
 		};

@@ -1,14 +1,12 @@
 package com.tickShare.controllers;
 
-import com.tickShare.entities.ITrip;
+import com.tickShare.entities.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.tickShare.repositories.TripRepository;
 
 @RestController
@@ -20,20 +18,44 @@ public class TripController {
         this.tripRepository = tripRepository;
     }
 
-    @GetMapping("/users/{id}")
-    public ITrip findUserById(@PathVariable("id") ITrip trip) {
+    @GetMapping("/trip/{id}")
+    public Trip findUserById(@PathVariable("id") Trip trip) {
         return trip;
     }
 
-    @GetMapping("/users")
-    public Page<ITrip> findAllUsers(Pageable pageable) {
+    @GetMapping("/trips")
+    public Page<Trip> findAllUsers(Pageable pageable) {
         return tripRepository.findAll(pageable);
     }
 
-    @GetMapping("/sortedusers")
-    public Page<ITrip> findAllUsersSortedByName() {
+    @GetMapping("/sortedtrips")
+    public Page<Trip> findAllUsersSortedByName() {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("name"));
         return tripRepository.findAll(pageable);
+    }
+    @PostMapping("/trip")
+    public Trip createNewTrip(@RequestBody Trip trip){
+        return tripRepository.save(trip);
+    }
+    @PutMapping("/trip/{id}")
+    public Trip replaceTrip(@RequestBody Trip newTrip, @PathVariable Long id){
+        return tripRepository.findById(id)
+                .map(trip -> {
+                    trip.setStartingLocation(newTrip.getStartingLocation());
+                    trip.setDestination(newTrip.getDestination());
+                    trip.setStartingTime(newTrip.getStartingTime());
+                    trip.setSeatsLeft(newTrip.getSeatsLeft());
+                    trip.setUserToken(newTrip.getUserToken());
+                    return tripRepository.save(trip);
+                })
+                .orElseGet(()->{
+                        newTrip.setId(id);
+                        return tripRepository.save(newTrip);
+                });
+    }
+    @DeleteMapping("trip/{id}")
+    public void deleteTrip(@PathVariable Long id){
+        tripRepository.deleteById(id);
     }
 
 }
