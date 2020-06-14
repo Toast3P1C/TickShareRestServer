@@ -6,7 +6,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
+
 @Data
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,14 +17,14 @@ public class Trip {
     Long id;
     private String startingLocation;
     private String destination;
-    private Date startingTime;
+    private String startingTime;
     private Integer seatsLeft;
     private String userToken;
 
     public Trip() {
     }
 
-    public Trip(String startingLocation, String destination, Date startingTime, Integer seatsLeft, String userToken) {
+    public Trip(String startingLocation, String destination, String startingTime, Integer seatsLeft, String userToken) {
         this.startingLocation = startingLocation;
         this.destination = destination;
         this.startingTime = startingTime;
@@ -32,4 +32,51 @@ public class Trip {
         this.userToken = userToken;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStartingLocation() {
+        return startingLocation;
+    }
+
+    public void setStartingLocation(String startingLocation) {
+        this.startingLocation = startingLocation;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getStartingTime() {
+        return startingTime;
+    }
+
+    public void setStartingTime(String startingTime) {
+        this.startingTime = startingTime;
+    }
+
+    public Integer getSeatsLeft() {
+        return seatsLeft;
+    }
+
+    public void setSeatsLeft(Integer seatsLeft) {
+        this.seatsLeft = seatsLeft;
+    }
+
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
 }

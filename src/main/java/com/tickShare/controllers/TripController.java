@@ -3,11 +3,12 @@ package com.tickShare.controllers;
 import com.tickShare.entities.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import com.tickShare.repositories.TripRepository;
+
+import java.util.List;
+
 
 @RestController
 public class TripController {
@@ -24,19 +25,15 @@ public class TripController {
     }
 
     @GetMapping("/trips")
-    public Page<Trip> findAllUsers(Pageable pageable) {
-        return tripRepository.findAll(pageable);
+    public List<Trip> findAllUsers()  {
+        return tripRepository.findAll();
     }
-
-    @GetMapping("/sortedtrips")
-    public Page<Trip> findAllUsersSortedByName() {
-        Pageable pageable = PageRequest.of(0, 5, Sort.by("name"));
-        return tripRepository.findAll(pageable);
-    }
+    
     @PostMapping("/trip")
     public Trip createNewTrip(@RequestBody Trip trip){
         return tripRepository.save(trip);
     }
+
     @PutMapping("/trip/{id}")
     public Trip replaceTrip(@RequestBody Trip newTrip, @PathVariable Long id){
         return tripRepository.findById(id)

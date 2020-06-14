@@ -20,7 +20,7 @@ public class TickShareApplication {
 	@Bean
 	CommandLineRunner initialize(TripRepository tripRepository) {
 		return args -> {
-				Trip trip = new Trip("Test","test", new Date(System.currentTimeMillis()),4,"Token");
+				Trip trip = new Trip("Test","test", new Date(System.currentTimeMillis()).toString(),4,"Token");
 				tripRepository.save(trip);
 				tripRepository.findAll().forEach(System.out::println);
 		};
