@@ -20,12 +20,12 @@ public class TripController {
     }
 
     @GetMapping("/trip/{id}")
-    public Trip findUserById(@PathVariable("id") Trip trip) {
+    public Trip findTripById(@PathVariable("id") Trip trip) {
         return trip;
     }
 
     @GetMapping("/trips")
-    public List<Trip> findAllUsers()  {
+    public List<Trip> findAllTrips()  {
         return tripRepository.findAll();
     }
     
