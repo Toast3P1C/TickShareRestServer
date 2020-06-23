@@ -15,7 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>14.0.1</java.version>
+		<java.version>14</java.version>
 		<start-class>com.tickShare.TickShareApplication</start-class>
 	</properties>
 
@@ -69,8 +69,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<source>14.0.1</source>
-					<target>14.0.1</target>
+					<release>14</release>
+					<source>14</source>
+					<target>14</target>
 				</configuration>
 			</plugin>
 		</plugins>
