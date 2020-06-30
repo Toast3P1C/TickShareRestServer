@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.tickShare.repositories.TripRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -17,14 +18,14 @@ public class TripController {
         this.tripRepository = tripRepository;
     }
 
-    @GetMapping("/trip/{id}")
-    public Trip findTripById(@PathVariable("id") Trip trip) {
-        return trip;
-    }
-
     @GetMapping("/trips")
     public List<Trip> findAllTrips()  {
         return tripRepository.findAll();
+    }
+
+    @GetMapping("/trip/{id}")
+    public Optional<Trip> findTripById(@PathVariable("id") Long id) {
+        return tripRepository.findById(id);
     }
     
     @PostMapping("/trip")
